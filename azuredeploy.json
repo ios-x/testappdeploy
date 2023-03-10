@@ -14,6 +14,30 @@
         "description": "Region to deploy resources to."
       }
     },
+    "awsAccessKeyId":{
+        "type": "string",
+        "metadata": {
+        "description": "Your AWS_ACCESS_KEY_ID"
+    }
+    },
+    "awsSecretAccessKey":{
+        "type": "string",
+        "metadata": {
+        "description": "Your AWS_SECRET_ACCESS_KEY"
+    }
+    },
+    "awsRegion":{
+        "type": "string",
+        "metadata": {
+        "description": "Your awsRegion"
+    }
+    },
+    "dynamodbTableName":{
+        "type": "string",
+        "metadata": {
+        "description": "Your dynamodb TableName"
+    }
+    },
     "appName": {
       "type": "string",
       "metadata": {
