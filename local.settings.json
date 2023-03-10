@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AWS_REGION":"us-east-1",
+    "AWS_ACCESS_KEY":"txpywk",
+    "AWS_SECRET_ACCESS_KEY":"tjmyr",
+    "DynamoDB_Table_Name": "Contact",
+    "FUNCTIONS_WORKER_RUNTIME": "node"
+  }
+}
