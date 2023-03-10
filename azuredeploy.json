@@ -32,12 +32,6 @@
         "description": "Your dynamodb TableName"
     }
     },
-    // "packageUri": {
-    //   "type": "securestring",
-    //   "metadata": {
-    //     "description": "URI of the application package on storage account."
-    //   }
-    // },
     "appName": {
       "type": "string",
       "metadata": {
@@ -73,10 +67,6 @@
             {
               "name": "DynamoDB_Table_Name",
               "value": "[parameters('dynamodbTableName')]"
-            },
-            {
-              "name": "WEBSITE_RUN_FROM_PACKAGE",
-              "value": "https://github.com/ios-x/testappdeploy"
             }
           ]
         }
