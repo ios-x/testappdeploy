@@ -2,12 +2,12 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    // "region": {
-    //   "type": "string",
-    //   "metadata": {
-    //     "description": "Region to deploy resources to."
-    //   }
-    // },
+    "region": {
+      "type": "string",
+      "metadata": {
+        "description": "Region to deploy resources to."
+      }
+    },
     "awsAccessKeyId":{
         "type": "string",
         "metadata": {
@@ -53,7 +53,7 @@
       "type": "Microsoft.Web/sites",
       "name": "[variables('functionAppName')]",
       "apiVersion": "2018-11-01",
-    //   "location": "[parameters('region')]",
+      "location": "[parameters('region')]",
       "kind": "functionapp",
       "properties": {
         "siteConfig": {
