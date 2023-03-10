@@ -2,12 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "resourceGroupName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the resource group to deploy resources to."
-      }
-    },
     "region": {
       "type": "string",
       "metadata": {
@@ -29,7 +23,7 @@
     "awsRegion":{
         "type": "string",
         "metadata": {
-        "description": "Your awsRegion"
+        "description": "Your AWS_Region"
     }
     },
     "dynamodbTableName":{
@@ -37,6 +31,12 @@
         "metadata": {
         "description": "Your dynamodb TableName"
     }
+    },
+    "packageUri": {
+      "type": "securestring",
+      "metadata": {
+        "description": "URI of the application package on storage account."
+      }
     },
     "appName": {
       "type": "string",
@@ -73,6 +73,10 @@
             {
               "name": "DynamoDB_Table_Name",
               "value": "[parameters('dynamodbTableName')]"
+            },
+            {
+              "name": "WEBSITE_RUN_FROM_PACKAGE",
+              "value": "[parameters('packageUri')]"
             }
           ]
         }
