@@ -75,7 +75,7 @@
 
       "resources": [
         {
-          "name": "web",
+          "name": "[variables('functionAppName')]",
           "type": "sourcecontrols",
           "apiVersion": "2019-08-01",
           "dependsOn": [
