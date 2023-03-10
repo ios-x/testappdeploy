@@ -82,7 +82,7 @@
           "properties": {}
         },
         {
-          "name": "[variables('functionAppName')]",
+          "name": "web",
           "type": "sourcecontrols",
           "location": "[parameters('region')]",
           "apiVersion": "2019-08-01",
