@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the resource group to deploy resources to."
+      }
+    },
+    "region": {
+      "type": "string",
+      "metadata": {
+        "description": "Region to deploy resources to."
+      }
+    },
+    "appName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Azure Function App."
+      }
+    }
+  },
+  "variables": {
+    "functionAppName": "[parameters('appName')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/sites",
+      "name": "[variables('functionAppName')]",
+      "apiVersion": "2018-11-01",
+      "location": "[parameters('region')]",
+      "kind": "functionapp",
+      "properties": {
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "AWS_ACCESS_KEY_ID",
+              "value": "[parameters('awsAccessKeyId')]"
+            },
+            {
+              "name": "AWS_SECRET_ACCESS_KEY",
+              "value": "[parameters('awsSecretAccessKey')]"
+            },
+            {
+              "name": "AWS_REGION",
+              "value": "[parameters('awsRegion')]"
+            },
+            {
+              "name": "DynamoDB_Table_Name",
+              "value": "[parameters('dynamodbTableName')]"
+            }
+          ]
+        }
+      },
+      "resources": [
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2018-11-01",
+          "dependsOn": [
+            "[concat('Microsoft.Web/Sites/', variables('functionAppName'))]"
+          ],
+          "properties": {}
+        },
+        {
+          "name": "logs",
+          "type": "config",
+          "apiVersion": "2018-11-01",
+          "dependsOn": [
+            "[concat('Microsoft.Web/Sites/', variables('functionAppName'))]"
+          ],
+          "properties": {}
+        }
+      ]
+    }
+  ]
+}
