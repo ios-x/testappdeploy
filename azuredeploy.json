@@ -77,6 +77,7 @@
         {
           "name": "[variables('functionAppName')]",
           "type": "sourcecontrols",
+          "location": "[parameters('region')]",
           "apiVersion": "2019-08-01",
           "dependsOn": [
             "[concat('Microsoft.Web/Sites/', variables('functionAppName'))]"
