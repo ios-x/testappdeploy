@@ -33,12 +33,12 @@
         "description": "Your DynamoDB TableName."
       }
     },
-    "appPackageUri": {
-      "type": "securestring",
-      "metadata": {
-        "description": "URI of the application package on storage account."
-      }
-    },
+    // "appPackageUri": {
+    //   "type": "securestring",
+    //   "metadata": {
+    //     "description": "URI of the application package on storage account."
+    //   }
+    // },
     "appName": {
       "type": "string",
       "metadata": {
@@ -66,7 +66,7 @@
             "AWS_SECRET_ACCESS_KEY": "[parameters('awsSecretAccessKey')]",
             "AWS_REGION": "[parameters('awsRegion')]",
             "DynamoDB_Table_Name": "[parameters('dynamodbTableName')]",
-            "WEBSITE_RUN_FROM_PACKAGE": "[parameters('appPackageUri')]"
+            // "WEBSITE_RUN_FROM_PACKAGE": "[parameters('appPackageUri')]"
           }
         }
       },
