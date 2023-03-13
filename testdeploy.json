@@ -1,0 +1,115 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "region": {
+        "type": "string",
+        "metadata": {
+          "description": "Region to deploy resources to."
+        }
+      },
+      "awsAccessKeyId":{
+          "type": "string",
+          "metadata": {
+          "description": "Your AWS_ACCESS_KEY_ID"
+      }
+      },
+      "awsSecretAccessKey":{
+          "type": "string",
+          "metadata": {
+          "description": "Your AWS_SECRET_ACCESS_KEY"
+      }
+      },
+      "awsRegion":{
+          "type": "string",
+          "metadata": {
+          "description": "Your AWS_Region"
+      }
+      },
+      "dynamodbTableName":{
+          "type": "string",
+          "metadata": {
+          "description": "Your dynamodb TableName"
+      }
+      },
+      "appName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the Azure Function App."
+        }
+      }
+    },
+    "variables": {
+      "functionAppName": "[parameters('appName')]"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Web/sites",
+        "name": "[variables('functionAppName')]",
+        "apiVersion": "2018-11-01",
+        "location": "[subscription().id resourceGroup().location]",
+        "kind": "functionapp",
+        "properties": {
+          "siteConfig": {
+            "appSettings": [
+              {
+                "name": "AWS_ACCESS_KEY_ID",
+                "value": "[parameters('awsAccessKeyId')]"
+              },
+              {
+                "name": "AWS_SECRET_ACCESS_KEY",
+                "value": "[parameters('awsSecretAccessKey')]"
+              },
+              {
+                "name": "AWS_REGION",
+                "value": "[parameters('awsRegion')]"
+              },
+              {
+                "name": "WEBSITE_RUN_FROM_PACKAGE",
+                "value": "[concat(parameters('repoUrl'), '#', parameters('branchName'))]"
+              },
+              {
+                "name": "DynamoDB_Table_Name",
+                "value": "[parameters('dynamodbTableName')]"
+              }
+            ]
+          }
+        },
+        "resources": [
+          {
+            "name": "appsettings",
+            "type": "config",
+            "apiVersion": "2018-11-01",
+            "dependsOn": [
+              "[concat('Microsoft.Web/Sites/', variables('functionAppName'))]"
+            ],
+            "properties": {}
+          },
+          {
+            "name": "logs",
+            "type": "config",
+            "apiVersion": "2018-11-01",
+            "dependsOn": [
+              "[concat('Microsoft.Web/Sites/', variables('functionAppName'))]"
+            ],
+            "properties": {}
+          },
+          {
+            "name": "web",
+            "type": "Microsoft.Web/sites/sourcecontrols",
+            "location": "[parameters('region')]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [
+              "[concat('Microsoft.Web/Sites/', variables('functionAppName'))]"
+            ],
+            "properties": {
+              "RepoUrl": "https://github.com/ios-x/testappdeploy",
+              "branch": "main",
+              "IsManualIntegration": false
+            }
+          }
+        ]
+        
+      }
+    ]
+  }
